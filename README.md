@@ -1,0 +1,2 @@
+# waws
+AWS Console Wrapper
