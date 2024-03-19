@@ -58,14 +58,14 @@ func showHelp() {
   waws COMMAND [SUBCOMMAND] [OPTIONS|ARGUMENTS]
 
 Commands/subcommands:
-    codecommit              cc  -c      CodeCommit operations
+    codecommit             cc  -c      CodeCommit operations
     
         list [QUERY]       l   -l      List repositories
-        clone REPO_NAME     c   -c      Clone repository
+        clone REPO_NAME    c   -c      Clone repository
 
-  codebuild                 db  -b      CodeBuild operations
+    codebuild              db  -b      CodeBuild operations
 
-  help                      h   -h      This help
+    help                   h   -h      This help
 `)
 }
 
