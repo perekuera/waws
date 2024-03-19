@@ -31,7 +31,7 @@ clean:
 	@echo "Clean process finished"
 
 run:
-	@go run $(SOURCE_DIR)/main.go
+	@go run $(SOURCE_DIR)/main.go help
 
 help:
 	@echo "Use:"
