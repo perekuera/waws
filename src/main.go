@@ -64,7 +64,7 @@ Commands/subcommands:
         list [QUERY]       l   -l      List repositories
         clone REPO_NAME    c   -c      Clone repository
 
-    codebuild              db  -b      CodeBuild operations
+    codebuild              cb  -b      CodeBuild operations
 
     help                   h   -h      This help
 
