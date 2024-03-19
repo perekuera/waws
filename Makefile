@@ -1,15 +1,14 @@
 # Makefile
-
-# Nombre del programa
 PROGRAM_NAME := waws
 
-# Directorio de instalación
+SOURCE_DIR := ./src
+
 INSTALL_DIR := /usr/local/bin
 
 # Compilación
 build:
 	@mkdir -p build
-	go build -o build/$(PROGRAM_NAME)
+	go build -o build/$(PROGRAM_NAME) $(SOURCE_DIR)/main.go
 
 # Instalación (depende de build)
 install: build
