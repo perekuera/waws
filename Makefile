@@ -5,36 +5,41 @@ SOURCE_DIR := ./src
 
 INSTALL_DIR := /usr/local/bin
 
-# Compilación
+GO_VERSION := $(shell go version 2>/dev/null)
+
+# Verificar si Go está instalado
+ifeq ($(strip $(GO_VERSION)),)
+$(error "Go no está instalado en el sistema. Por favor, instale Go antes de continuar.")
+endif
+
 build:
 	@mkdir -p build
-	go build -o build/$(PROGRAM_NAME) $(SOURCE_DIR)/main.go
+	@go build -o build/$(PROGRAM_NAME) $(SOURCE_DIR)/main.go
+	@echo "Build process finished"
 
-# Instalación (depende de build)
 install: build
 	@mkdir -p $(INSTALL_DIR)
-	cp build/$(PROGRAM_NAME) $(INSTALL_DIR)/$(PROGRAM_NAME)
+	@sudo cp build/$(PROGRAM_NAME) $(INSTALL_DIR)/$(PROGRAM_NAME)
+	@echo "Install process finished"
 
-# Desinstalación
 uninstall:
-	rm -f $(INSTALL_DIR)/$(PROGRAM_NAME)
+	@sudo rm -f $(INSTALL_DIR)/$(PROGRAM_NAME)
+	@echo "Uninstall process finished"
 
-# Limpieza
 clean:
-	rm -rf build
+	@rm -rf build
+	@echo "Clean process finished"
 
-# Ejecutar el programa
 run:
-	go run .
+	@go run $(SOURCE_DIR)/main.go
 
-# Ayuda
 help:
-	@echo "Uso:"
+	@echo "Use:"
 	@echo "  make [target]"
 	@echo ""
-	@echo "Objetivos disponibles:"
-	@echo "  build               Compilar el programa"
-	@echo "  install             Instalar el programa"
-	@echo "  uninstall           Desinstalar el programa"
-	@echo "  clean               Eliminar archivos compilados"
-	@echo "  run                 Ejecutar el programa (requiere tener Go instalado)"
+	@echo "Available targets:"
+	@echo "  build               Build program"
+	@echo "  install             Build and installs program"
+	@echo "  uninstall           Uninstall program"
+	@echo "  clean               Clean build folder"
+	@echo "  run                 Runs program"
