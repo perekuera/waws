@@ -54,8 +54,9 @@ func main() {
 }
 
 func showHelp() {
-	fmt.Print(`Usage: 
-  waws COMMAND [SUBCOMMAND] [OPTIONS|ARGUMENTS]
+	fmt.Print(`
+Usage: 
+    waws COMMAND [SUBCOMMAND] [OPTIONS|ARGUMENTS]
 
 Commands/subcommands:
     codecommit             cc  -c      CodeCommit operations
@@ -66,6 +67,7 @@ Commands/subcommands:
     codebuild              db  -b      CodeBuild operations
 
     help                   h   -h      This help
+
 `)
 }
 
