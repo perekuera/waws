@@ -28,6 +28,13 @@ func main() {
             }
             listRepositories(query)
         case "clone", "c", "-c":
+            if len(os.Args) > 3 {
+                name := os.Args[3]
+            } else {
+                fmt.Println("Required repository name")
+                os.Exit(1)    
+            }
+            cloneRepository(name)
         default:
             fmt.Println("Invalid subcommand:", subcommand)
             os.Exit(1)
@@ -69,4 +76,21 @@ func listRepositories(query string) {
         os.Exit(1)
     }
     fmt.Println(string(output))
+}
+
+func cloneRepository(name string) {
+    cmd := exec.Command("aws", "codecommit", "get-repository", "--output", "text", "--repository-name", name, "--query", "repositoryMetadata.cloneUrlSsh")
+    output, err := cmd.CombinedOutput()
+    if err != nil {
+        fmt.Println("Error getting repository URL:", err)
+        os.Exit(1)
+    }
+    url := strings.TrimSpace(string(output))
+    cmd := exec.Command("git", "clone", url)
+    gitCmd.Stdout = os.Stdout
+    gitCmd.Stderr = os.Stderr   
+    if err := gitCmd.Run(); err != nil {
+        fmt.Println("Error cloning repository:", err)
+        os.Exit(1)
+    }
 }
